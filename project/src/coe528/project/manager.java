@@ -24,7 +24,7 @@ public class manager {
     }
     
     ArrayList<customer> data = new ArrayList<customer>();
-    File info = new File("info.txt");
+   // File info = new File("info.txt");
     String line = null;
     
     //For the get response
@@ -35,7 +35,7 @@ public class manager {
             }*/
 
     
-    public void addCustomer(String u, String p, int b) {
+    public void addCustomer(String u, String p, String b) {
         data.add(new customer(u, p, b));
         
         Iterator<customer> iter = data.iterator();
@@ -44,8 +44,9 @@ public class manager {
             customer ob = iter.next();
             if (ob.getName().equals(u)) {
                 try {
-                    FileWriter fw = new FileWriter("info.txt", true);
-                    fw.write(u + "" + p + "" + b);
+                    File customer = new File(u+".txt");
+                    FileWriter fw = new FileWriter(u+".txt", true);
+                    fw.write(u + "/" + p + "/" + b);
                     fw.write("\r\n");
                     fw.close();
                 } catch (IOException e) {
@@ -55,6 +56,26 @@ public class manager {
             
         }
         
+    }
+    
+    public void delCustomer(String u, String p) {
+        
+        Iterator<customer> iter = data.iterator();
+        
+        while(iter.hasNext()) {
+            customer ob = iter.next();
+            if (ob.getName().equals(u)) {
+                File customer = new File(u+".txt");
+                if (customer.delete()) {
+                    System.out.println("File " + u + " deleted");
+                }
+                else {
+                    System.out.println("File " + u + " not deleted");
+                }
+                    
+                
+            }
+        }
     }
     
     public boolean auth() {

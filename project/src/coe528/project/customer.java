@@ -12,19 +12,19 @@ package coe528.project;
 public class customer {
     String name;
     String pass;
-    int balance;
+    String balance;
 
-    public customer(String name, String pass, int balance) {
+    public customer(String name, String pass, String balance) {
         this.name = name;
         this.pass = pass;
         this.balance = balance;
     }
 
-    public int getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 

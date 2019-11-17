@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
@@ -33,12 +34,14 @@ public class test extends Application {
         m.setVgap(10);
         m.setPadding(new Insets(25, 25, 25, 25));
         Scene manageScene = new Scene(m, 640, 480);
+       
         //Startup window
         GridPane container = new GridPane();
         container.setAlignment(Pos.CENTER);
         container.setHgap(10);
         container.setVgap(10);
         container.setPadding(new Insets(25, 25, 25, 25));
+        Scene scene = new Scene(container, 640, 480);
         
         //Welcome Text
         Text Welcome = new Text("Welcome to Royal Bank of Rashif");
@@ -74,35 +77,63 @@ public class test extends Application {
                     
                     //Title
                     Text mtitle = new Text("Hello Manager");
-                    m.add(mtitle, 0, 0, 2, 1);
+                    m.add(mtitle, 0, 0);
                     
                     //Buttons
-                    Button addCust = new Button("Add Customer");
-                    Button delCust = new Button("Delete Customer");
+                    Button addCust = new Button("Add");
+                    Button delCust = new Button("Delete ");
                     Button logout = new Button("Logout");
-                    HBox buttons = new HBox(10);
-                    buttons.setAlignment(Pos.TOP_CENTER);
-                    buttons.getChildren().add(addCust);
-                    buttons.getChildren().add(delCust);
-                    buttons.getChildren().add(logout);
-                    m.add(buttons, 1, 0);
+                    VBox mbuttons = new VBox(10);
+                    mbuttons.setAlignment(Pos.CENTER);
+                    mbuttons.getChildren().add(addCust);
+                    mbuttons.getChildren().add(delCust);
+                    mbuttons.getChildren().add(logout);
+                    m.add(mbuttons, 1, 0);
                     
-                    //Textfields
+                    //New User Label
+                    Label newuserlabel = new Label("USERNAME:");
+                    m.add(newuserlabel, 2, 0);
+                    Label newpasslabel = new Label("PASSWORD:");
+                    m.add(newpasslabel, 3, 0);
+                    Label moneylabel = new Label("MONEY:");
+                    m.add(moneylabel, 4, 0);
+                    
+                    //New User TextFields
                     TextField newuser = new TextField();
                     m.add(newuser, 2, 1);
-                    
                     TextField newpass = new TextField();
                     m.add(newpass, 3, 1);
+                    TextField money = new TextField();
+                    m.add(money, 4, 1);
                     
                     addCust.setOnMouseClicked((new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
                             String cuser = newuser.getText();
                             String cpass = newpass.getText();
+                            String cmoney = money.getText();
                             
-                            admin.addCustomer(cuser, cpass, 0);
+                            admin.addCustomer(cuser, cpass, cmoney);
                         }
+                    }));
                     
+                    delCust.setOnMouseClicked((new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            String cuser = newuser.getText();
+                            String cpass = newpass.getText();
+                            
+                            
+                            admin.delCustomer(cuser, cpass);
+                        }
+                    }));
+                    
+                    logout.setOnMouseClicked((new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent event) {
+                            stage.setScene(scene);
+                        }
+                        
                     }));
     
             
@@ -115,7 +146,7 @@ public class test extends Application {
         }));
 
         
-        Scene scene = new Scene(container, 640, 480);
+        
         stage.setScene(scene);
         stage.show();
     }
