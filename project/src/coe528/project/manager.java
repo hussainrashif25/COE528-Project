@@ -7,7 +7,6 @@ package coe528.project;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Scanner;
 import java.io.*;
 /**
  *
@@ -47,8 +46,9 @@ public class manager {
                     File customer = new File(u+".txt");
                     FileWriter fw = new FileWriter(u+".txt", true);
                     fw.write(u + "/" + p + "/" + b);
-                    fw.write("\r\n");
+                    //fw.write("\r\n");
                     fw.close();
+                    System.out.println("File " + u + " created.");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

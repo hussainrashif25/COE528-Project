@@ -13,12 +13,15 @@ public class customer {
     String name;
     String pass;
     String balance;
+    
 
     public customer(String name, String pass, String balance) {
         this.name = name;
         this.pass = pass;
         this.balance = balance;
     }
+    
+   // int amount = Integer.parseInt(this.balance);
 
     public String getBalance() {
         return balance;
